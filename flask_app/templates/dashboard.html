@@ -1,0 +1,44 @@
+{%extends "layout.html"%}{% block body%}
+<div class="row justify-content-around">
+  <div class="col-4">
+    <h2>Welcome {{session.first_name}}</h2>
+  </div>
+  <div class="col-4">
+    <div class="space-evenly">
+      <a href="/recipes/new">Create</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <h3>These are the recipes</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Under 30 Minutes</td>
+          <td>Actions</td>
+        </tr>
+      </thead>
+      {% for recipe in recipes %}
+      <tr>
+        <td>{{recipe.name}}</td>
+        {% if recipe.under_30 == 1 %}
+        <td>Yes</td>
+        {% else %}
+        <td>No</td>
+        {% endif %}
+        <td>
+          <div class="d-flex justify-content-around">
+            <a href="/recipes/{{recipe.id}}">View Instructions</a>
+            <a href="/recipes/edit/{{recipe.id}}">edit</a>
+            <a href="/recipes/delete/{{recipe.id}}">delete</a>
+          </div>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}
